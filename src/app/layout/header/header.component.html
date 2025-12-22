@@ -1,0 +1,72 @@
+<!-- HEADER -->
+
+<header class="border-b bg-white sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+
+    <!-- LOGO -->
+    <a
+      routerLink="/"
+      (click)="scrollToTop(); closeMobileMenu()"
+      class="text-green-600 font-bold text-lg">
+      Meal to Heal
+    </a>
+
+    <!-- DESKTOP NAV -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a routerLink="/menu">Menu</a>
+
+      <a routerLink="/cart" class="relative">
+        Cart
+        <span
+          *ngIf="cartCount > 0"
+          class="absolute -top-2 -right-3 bg-red-500 text-white text-xs
+                 w-5 h-5 flex items-center justify-center rounded-full">
+          {{ cartCount }}
+        </span>
+      </a>
+
+      <!-- PROFILE DROPDOWN -->
+      <div class="relative" appClickOutside (appClickOutside)="closeProfileMenu()">
+        <button
+          (click)="toggleProfileMenu()"
+          class="w-10 h-10 rounded-full bg-green-100 text-green-700">
+          👤
+        </button>
+
+        <div
+          *ngIf="showProfileMenu"
+          class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow border overflow-hidden">
+
+          <ng-container *ngIf="isLoggedIn(); else loggedOut">
+            <a routerLink="/orders" class="block px-4 py-3 hover:bg-green-50">My Orders</a>
+            <a routerLink="/wishlist" class="block px-4 py-3 hover:bg-green-50">Wishlist</a>
+            <a routerLink="/account" class="block px-4 py-3 hover:bg-green-50">Account Settings</a>
+            <a routerLink="/contact" class="block px-4 py-3 hover:bg-green-50">Contact Us</a>
+            <button
+              (click)="logout()"
+              class="block w-full text-left px-4 py-3 text-red-600 hover:bg-red-50">
+              Sign Out
+            </button>
+          </ng-container>
+
+          <ng-template #loggedOut>
+            <a routerLink="/wishlist" class="block px-4 py-3 hover:bg-green-50">Wishlist</a>
+            <a routerLink="/login" class="block px-4 py-3 hover:bg-green-50">Login</a>
+            <a routerLink="/signup" class="block px-4 py-3 hover:bg-green-50">Sign Up</a>
+            <a routerLink="/contact" class="block px-4 py-3 hover:bg-green-50">Contact Us</a>
+          </ng-template>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <button class="md:hidden text-green-700" (click)="toggleMobileMenu()">☰</button>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <div *ngIf="mobileMenuOpen" class="md:hidden bg-white border-t">
+    <a routerLink="/menu" class="block px-4 py-3">Menu</a>
+    <a routerLink="/cart" class="block px-4 py-3">Cart</a>
+    <a routerLink="/login" class="block px-4 py-3">Login</a>
+  </div>
+</header>
