@@ -1,10 +1,13 @@
-import { Addon } from './addon';
-
 export interface Food {
   id: number;
   name: string;
-  subtitle?: string; // ✅ ADD THIS (optional)
+  subtitle: string;
   basePrice: number;
-  category: 'sprouts' | 'airfried';
-  addons: Addon[];
+  category: 'snacks' | 'starters' | 'sandwiches' | 'noodles' | 'pizzas' | 'pasta' | 'burgers' | 'gravy' | 'roti' | 'thali' | 'beverages' | 'sweets' | 'healthy' | 'bakery';
+}
+
+export interface Addon {
+  id: number;
+  name: string;
+  price: number;
 }

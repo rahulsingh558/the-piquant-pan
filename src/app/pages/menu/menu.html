@@ -1,76 +1,99 @@
-<div class="min-h-screen bg-green-50 py-10">
-  <div class="max-w-6xl mx-auto px-4">
+<div class="min-h-screen bg-amber-50 py-10">
+  <div class="max-w-7xl mx-auto px-4">
 
     <!-- TITLE -->
-    <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">
-      Our Healthy Menu
-    </h2>
-    <p class="text-gray-600 text-center mb-8">
-      Choose from our selection of fresh, protein-rich sprout bowls
-    </p>
-
-    <!-- FILTER SWITCHES -->
-    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-10">
-
-      <!-- ALL -->
-      <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow">
-        <input type="radio" name="foodType" class="hidden"
-               [checked]="selectedType === 'all'"
-               (change)="selectedType = 'all'">
-        <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
-              [class.bg-green-700]="selectedType === 'all'">
-          <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
-                [class.translate-x-5]="selectedType === 'all'"></span>
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-bold text-amber-800 mb-3">
+        <span class="font-serif">The Piquant Pan</span>
+      </h2>
+      <p class="text-gray-700 text-lg">
+        Explore our extensive menu of delicious dishes
+      </p>
+      <div class="mt-2">
+        <span class="text-sm text-amber-600 bg-amber-100 px-3 py-1 rounded-full">
+          *Prices are indicative and subject to availability
         </span>
-        <span class="text-sm font-medium text-gray-700">All</span>
-      </label>
+      </div>
+    </div>
 
-      <!-- VEG -->
-      <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow">
-        <input type="radio" name="foodType" class="hidden"
-               [checked]="selectedType === 'veg'"
-               (change)="selectedType = 'veg'">
-        <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
-              [class.bg-green-600]="selectedType === 'veg'">
-          <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
-                [class.translate-x-5]="selectedType === 'veg'"></span>
-        </span>
-        <span class="text-sm font-medium text-gray-700">Veg</span>
-      </label>
+    <!-- CATEGORY FILTERS -->
+    <div class="mb-10">
+      <div class="flex flex-wrap justify-center gap-3 mb-6">
+        <button 
+          *ngFor="let category of categories" 
+          (click)="selectCategory(category.id)"
+          class="px-5 py-2.5 rounded-full font-medium transition-all duration-300"
+          [class]="selectedCategory === category.id 
+            ? 'bg-amber-600 text-white shadow-md' 
+            : 'bg-white text-gray-700 border border-amber-200 hover:bg-amber-50'">
+          {{category.name}}
+        </button>
+      </div>
+      
+      <!-- TYPE FILTER SWITCHES -->
+      <div class="flex flex-wrap justify-center gap-4 mb-6">
+        <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow border border-gray-200">
+          <input type="radio" name="foodType" class="hidden"
+                 [checked]="selectedType === 'all'"
+                 (change)="selectedType = 'all'">
+          <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
+                [class.bg-amber-600]="selectedType === 'all'">
+            <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
+                  [class.translate-x-5]="selectedType === 'all'"></span>
+          </span>
+          <span class="text-sm font-medium text-gray-700">All</span>
+        </label>
 
-      <!-- EGG -->
-      <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow">
-        <input type="radio" name="foodType" class="hidden"
-               [checked]="selectedType === 'egg'"
-               (change)="selectedType = 'egg'">
-        <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
-              [class.bg-yellow-500]="selectedType === 'egg'">
-          <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
-                [class.translate-x-5]="selectedType === 'egg'"></span>
-        </span>
-        <span class="text-sm font-medium text-gray-700">Egg</span>
-      </label>
+        <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow border border-gray-200">
+          <input type="radio" name="foodType" class="hidden"
+                 [checked]="selectedType === 'veg'"
+                 (change)="selectedType = 'veg'">
+          <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
+                [class.bg-green-600]="selectedType === 'veg'">
+            <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
+                  [class.translate-x-5]="selectedType === 'veg'"></span>
+          </span>
+          <span class="text-sm font-medium text-gray-700">Veg</span>
+        </label>
 
-      <!-- NON-VEG -->
-      <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow">
-        <input type="radio" name="foodType" class="hidden"
-               [checked]="selectedType === 'nonveg'"
-               (change)="selectedType = 'nonveg'">
-        <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
-              [class.bg-red-600]="selectedType === 'nonveg'">
-          <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
-                [class.translate-x-5]="selectedType === 'nonveg'"></span>
-        </span>
-        <span class="text-sm font-medium text-gray-700">Non-Veg</span>
-      </label>
+        <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow border border-gray-200">
+          <input type="radio" name="foodType" class="hidden"
+                 [checked]="selectedType === 'egg'"
+                 (change)="selectedType = 'egg'">
+          <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
+                [class.bg-yellow-500]="selectedType === 'egg'">
+            <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
+                  [class.translate-x-5]="selectedType === 'egg'"></span>
+          </span>
+          <span class="text-sm font-medium text-gray-700">Egg</span>
+        </label>
 
+        <label class="flex items-center gap-2 cursor-pointer px-4 py-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow border border-gray-200">
+          <input type="radio" name="foodType" class="hidden"
+                 [checked]="selectedType === 'nonveg'"
+                 (change)="selectedType = 'nonveg'">
+          <span class="w-10 h-5 rounded-full bg-gray-300 relative transition"
+                [class.bg-red-600]="selectedType === 'nonveg'">
+            <span class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition"
+                  [class.translate-x-5]="selectedType === 'nonveg'"></span>
+          </span>
+          <span class="text-sm font-medium text-gray-700">Non-Veg</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- CATEGORY HEADER -->
+    <div *ngIf="selectedCategory !== 'all'" class="mb-8">
+      <h3 class="text-2xl font-bold text-amber-800 mb-2">
+        {{getCategoryName(selectedCategory)}}
+      </h3>
+      <div class="h-1 w-24 bg-amber-500 rounded-full"></div>
     </div>
 
     <!-- MENU GRID -->
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <div *ngFor="let food of filteredFoods"
-           class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col overflow-hidden border border-gray-100">
+           class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col overflow-hidden border border-amber-100">
 
         <!-- FOOD TYPE INDICATOR -->
         <div class="absolute top-3 left-3 z-10">
@@ -84,8 +107,15 @@
           </span>
         </div>
 
+        <!-- CATEGORY BADGE -->
+        <div class="absolute top-3 right-3 z-10">
+          <span class="text-xs font-medium px-2 py-1 rounded-full bg-amber-100 text-amber-800">
+            {{getCategoryName(food.category)}}
+          </span>
+        </div>
+
         <!-- IMAGE -->
-        <div class="relative overflow-hidden h-56">
+        <div class="relative overflow-hidden h-48">
           <img
             [src]="food.image"
             [alt]="food.name"
@@ -100,7 +130,7 @@
           <!-- NAME + WISHLIST -->
           <div class="mb-3 flex justify-between items-start gap-2">
             <div class="flex-1">
-              <h3 class="text-xl font-bold text-gray-800 mb-1">
+              <h3 class="text-lg font-bold text-gray-800 mb-1 line-clamp-1">
                 {{ food.name }}
               </h3>
               <p class="text-sm text-gray-500 mb-2">
@@ -109,16 +139,12 @@
               
               <!-- QUICK ADDONS INFO -->
               <div class="flex flex-wrap gap-1 mb-3">
-                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
-                  Onion
+                <span *ngFor="let addon of food.addons.slice(0, 3)" 
+                      class="text-xs bg-amber-50 text-amber-800 px-2 py-1 rounded">
+                  {{addon.name}}
                 </span>
-                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
-                  Tomato
-                </span>
-                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
-                  Cucumber
-                </span>
-                <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
+                <span *ngIf="food.addons.length > 3" 
+                      class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
                   +{{ food.addons.length - 3 }} more
                 </span>
               </div>
@@ -152,22 +178,22 @@
 
           <!-- PRICE -->
           <div class="mb-4">
-            <p class="text-green-700 font-bold text-2xl">
+            <p class="text-amber-700 font-bold text-2xl">
               ₹{{ food.basePrice }}
             </p>
             <p class="text-xs text-gray-500">Base price</p>
           </div>
 
           <!-- FOOTER -->
-          <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100">
+          <div class="flex justify-between items-center mt-auto pt-4 border-t border-amber-100">
             <div class="text-sm text-gray-600">
-              <span class="font-medium">{{ food.type === 'veg' ? '🥬' : food.type === 'egg' ? '🥚' : '🍗' }}</span>
+              <span class="font-medium">{{ getTypeIcon(food.type) }}</span>
               <span class="ml-2">Customizable</span>
             </div>
             <button
               (click)="openAddonPopup(food)"
-              class="bg-gradient-to-r from-green-600 to-green-700 text-white px-5 py-2.5 rounded-xl
-                     hover:from-green-700 hover:to-green-800 transition-all duration-300 
+              class="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-5 py-2.5 rounded-xl
+                     hover:from-amber-700 hover:to-amber-800 transition-all duration-300 
                      cursor-pointer font-semibold shadow-md hover:shadow-lg flex items-center gap-2">
               <fa-icon [icon]="faCartPlus" class="text-white" /> 
               Add to Cart
@@ -176,18 +202,17 @@
 
         </div>
       </div>
-
     </div>
 
     <!-- EMPTY STATE -->
     <div *ngIf="filteredFoods.length === 0" 
-         class="text-center py-16 bg-white rounded-2xl shadow-sm">
-      <div class="text-5xl mb-4">🥗</div>
-      <h3 class="text-xl font-bold text-gray-700 mb-2">No items found</h3>
-      <p class="text-gray-500 mb-6">Try selecting a different filter</p>
+         class="text-center py-16 bg-white rounded-2xl shadow-sm border border-amber-100">
+      <div class="text-5xl mb-4">🍽️</div>
+      <h3 class="text-xl font-bold text-gray-700 mb-2">No items found in this category</h3>
+      <p class="text-gray-500 mb-6">Try selecting a different filter or category</p>
       <button
-        (click)="selectedType = 'all'"
-        class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+        (click)="selectedCategory = 'all'; selectedType = 'all'"
+        class="bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition-colors">
         Show All Items
       </button>
     </div>
@@ -195,7 +220,7 @@
   </div>
 </div>
 
-<!-- ADDON POPUP MODAL -->
+<!-- ADDON POPUP MODAL (Keep the same structure as before) -->
 <div *ngIf="showAddonModal"
      class="fixed inset-0 z-50 flex items-center justify-center p-4"
      aria-modal="true"
@@ -227,7 +252,7 @@
       </div>
       
       <div class="flex items-center gap-2">
-        <span class="text-green-700 font-semibold text-lg">
+        <span class="text-amber-700 font-semibold text-lg">
           ₹{{ selectedFood.basePrice }}
         </span>
         <span class="text-xs text-gray-500">Base Price</span>
@@ -317,13 +342,13 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <label *ngFor="let addon of getPremiumAddons(selectedFood)"
                  class="flex flex-col items-center p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer group
-                        [&:has(input:checked)]:border-green-500 [&:has(input:checked)]:bg-green-50
-                        hover:border-green-300 hover:bg-green-50/50"
-                 [class]="isPremiumAddonSelected(addon.id) ? 'border-green-500 bg-green-50' : 'border-gray-200'">
+                        [&:has(input:checked)]:border-amber-500 [&:has(input:checked)]:bg-amber-50
+                        hover:border-amber-300 hover:bg-amber-50/50"
+                 [class]="isPremiumAddonSelected(addon.id) ? 'border-amber-500 bg-amber-50' : 'border-gray-200'">
             
             <!-- ADDON IMAGE -->
             <div class="relative mb-3">
-              <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-gray-100 group-hover:border-green-200 transition-colors">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-gray-100 group-hover:border-amber-200 transition-colors">
                 <img [src]="getAddonImage(addon.name)" 
                      [alt]="addon.name"
                      class="w-full h-full object-cover">
@@ -336,7 +361,7 @@
                        class="sr-only">
                 <svg *ngIf="isPremiumAddonSelected(addon.id)" 
                      xmlns="http://www.w3.org/2000/svg" 
-                     class="h-4 w-4 text-green-600" 
+                     class="h-4 w-4 text-amber-600" 
                      viewBox="0 0 20 20" 
                      fill="currentColor">
                   <path fill-rule="evenodd" 
@@ -350,7 +375,7 @@
             <div class="text-center w-full">
               <span class="font-medium text-gray-800">{{ addon.name }}</span>
               <div class="mt-2">
-                <span class="text-green-700 font-bold text-lg">+₹{{ addon.price }}</span>
+                <span class="text-amber-700 font-bold text-lg">+₹{{ addon.price }}</span>
               </div>
             </div>
             
@@ -401,7 +426,7 @@
             </p>
           </div>
           <div class="text-right">
-            <p class="text-2xl font-bold text-green-700">₹{{ modalTotal }}</p>
+            <p class="text-2xl font-bold text-amber-700">₹{{ modalTotal }}</p>
           </div>
         </div>
       </div>
@@ -417,8 +442,8 @@
 
         <button
           (click)="confirmAddToCart()"
-          class="flex-1 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl
-                 hover:from-green-700 hover:to-green-800 transition-all duration-300
+          class="flex-1 px-4 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl
+                 hover:from-amber-700 hover:to-amber-800 transition-all duration-300
                  font-semibold shadow-md hover:shadow-lg flex items-center justify-center gap-2">
           <fa-icon [icon]="faCartPlus" class="text-white" /> 
           Add to Cart • ₹{{ modalTotal }}

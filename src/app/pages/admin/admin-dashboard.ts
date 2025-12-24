@@ -29,9 +29,10 @@ export class AdminDashboard {
   
   newItem: Omit<AdminMenuItem, 'id'> = {
     name: '',
-    subtitle: 'Healthy • Fresh • Protein-rich',
+    subtitle: 'Delicious • Fresh • Flavorful',
     basePrice: 0,
     type: 'veg', // Default type
+    category: 'snacks', // Added category field
     image: '',
     defaultAddons: [],
     extraAddons: [],
@@ -108,69 +109,19 @@ export class AdminDashboard {
   ];
 
   bestSelling = [
-    { name: 'Moong Sprouts Bowl', sold: 52 },
-    { name: 'Egg Meal Bowl', sold: 41 },
-    { name: 'Paneer Sprouts Bowl', sold: 34 },
-    { name: 'Chicken Bowl', sold: 28 },
+    { name: 'Veg Pakoda', sold: 52 },
+    { name: 'Paneer Tikka', sold: 41 },
+    { name: 'Chicken 65', sold: 34 },
+    { name: 'Chicken Biryani', sold: 28 },
   ];
 
   constructor(
     private menuService: MenuAdminService,
     private auth: AdminAuthService
   ) {
-    /* Seed menu once */
-    this.menuService.seedIfEmpty([
-      {
-        id: 1,
-        name: 'Moong Sprouts Bowl',
-        subtitle: 'Healthy • Fresh • Protein-rich',
-        basePrice: 80,
-        type: 'veg',
-        image:
-          'https://images.unsplash.com/photo-1540420828642-fca2c5c18abe?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-        defaultAddons: [
-          { id: 1, name: 'Onion', price: 0 },
-          { id: 2, name: 'Tomato', price: 0 },
-          { id: 3, name: 'Cucumber', price: 0 },
-        ],
-        extraAddons: [],
-      },
-      {
-        id: 2,
-        name: 'Egg Meal Bowl',
-        subtitle: 'Protein-packed • Healthy • Delicious',
-        basePrice: 120,
-        type: 'egg',
-        image:
-          'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-        defaultAddons: [
-          { id: 1, name: 'Lettuce', price: 0 },
-          { id: 2, name: 'Carrot', price: 0 },
-        ],
-        extraAddons: [
-          { id: 3, name: 'Extra Cheese', price: 20 },
-          { id: 4, name: 'Avocado', price: 30 },
-        ],
-      },
-      {
-        id: 3,
-        name: 'Chicken Bowl',
-        subtitle: 'High Protein • Non-Vegetarian • Fresh',
-        basePrice: 140,
-        type: 'nonveg',
-        image:
-          'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-        defaultAddons: [
-          { id: 1, name: 'Onion', price: 0 },
-          { id: 2, name: 'Tomato', price: 0 },
-          { id: 3, name: 'Capsicum', price: 0 },
-        ],
-        extraAddons: [
-          { id: 4, name: 'Extra Chicken', price: 50 },
-        ],
-      },
-    ]);
-
+    /* COMPREHENSIVE SEED DATA - All items from PDF */
+    this.menuService.seedIfEmpty(this.menuService.getAllMenuItemsFromPDF());
+    
     this.loadItems();
     this.buildRevenuePolyline();
     
@@ -183,6 +134,30 @@ export class AdminDashboard {
   ========================== */
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  /* =========================
+     CATEGORY DISPLAY NAME
+  ========================== */
+  getCategoryDisplayName(categoryId: string): string {
+    const categoryMap: { [key: string]: string } = {
+      'snacks': 'Snacks',
+      'starters': 'Starters',
+      'sandwiches': 'Sandwiches',
+      'noodles': 'Noodles & Maggi',
+      'pizzas': 'Pizzas',
+      'pasta': 'Pasta',
+      'burgers': 'Burgers',
+      'gravy': 'Gravy Items',
+      'roti': 'Roti & Rice',
+      'thali': 'Thali',
+      'beverages': 'Beverages',
+      'sweets': 'Sweets & Bakery',
+      'healthy': 'Healthy Food',
+      'bakery': 'Bakery'
+    };
+    
+    return categoryMap[categoryId] || categoryId;
   }
 
   /* =========================
@@ -213,9 +188,10 @@ export class AdminDashboard {
     // Reset form
     this.newItem = {
       name: '',
-      subtitle: 'Healthy • Fresh • Protein-rich',
+      subtitle: 'Delicious • Fresh • Flavorful',
       basePrice: 0,
       type: 'veg',
+      category: 'snacks', // Reset to default category
       image: '',
       defaultAddons: [],
       extraAddons: [],

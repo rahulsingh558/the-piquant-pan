@@ -1,24 +1,24 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Sidebar for Desktop / Mobile -->
   <div
-    class="lg:flex fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-green-800 to-green-900 text-white flex-col transform transition-transform duration-300 ease-in-out z-40"
+    class="lg:flex fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-amber-800 to-amber-900 text-white flex-col transform transition-transform duration-300 ease-in-out z-40"
     [class.translate-x-0]="isSidebarOpen" [class.-translate-x-full]="!isSidebarOpen" [class.lg:translate-x-0]="true">
     <!-- Logo and Close Button -->
-    <div class="p-6 border-b border-green-700 flex items-center justify-between">
+    <div class="p-6 border-b border-amber-700 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+        <div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
           </svg>
         </div>
         <div>
-          <h1 class="text-xl font-bold">Meal to Heal</h1>
-          <p class="text-xs text-green-200">Admin Panel</p>
+          <h1 class="text-xl font-bold font-serif">The Piquant Pan</h1>
+          <p class="text-xs text-amber-200">Admin Panel</p>
         </div>
       </div>
       <!-- Close button for mobile -->
-      <button (click)="toggleSidebar()" class="lg:hidden text-green-200 hover:text-white">
+      <button (click)="toggleSidebar()" class="lg:hidden text-amber-200 hover:text-white">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -28,7 +28,7 @@
     <!-- Navigation -->
     <nav class="flex-1 p-4 space-y-2">
       <a routerLink="/admin/dashboard"
-        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-green-700 text-green-100">
+        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-amber-700 text-amber-100">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -36,7 +36,7 @@
         <span>Dashboard</span>
       </a>
       <a routerLink="/admin/orders"
-        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-green-700 text-green-100">
+        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-amber-700 text-amber-100">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-1.205a9.002 9.002 0 00-9-3m9 3v1m0 0v1m0-1h1m-1 0h-1" />
@@ -44,7 +44,7 @@
         <span>Orders</span>
       </a>
 
-      <a class="flex items-center space-x-3 p-3 rounded-lg hover:bg-green-700 text-green-100">
+      <a class="flex items-center space-x-3 p-3 rounded-lg hover:bg-amber-700 text-amber-100">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-1.205a9.002 9.002 0 00-9-3m9 3v1m0 0v1m0-1h1m-1 0h-1" />
@@ -52,7 +52,7 @@
         <span>Customers</span>
       </a>
 
-      <a class="flex items-center space-x-3 p-3 rounded-lg hover:bg-green-700 text-green-100">
+      <a class="flex items-center space-x-3 p-3 rounded-lg hover:bg-amber-700 text-amber-100">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -60,7 +60,7 @@
         <span>Analytics</span>
       </a>
 
-      <a class="flex items-center space-x-3 p-3 rounded-lg hover:bg-green-700 text-green-100">
+      <a class="flex items-center space-x-3 p-3 rounded-lg hover:bg-amber-700 text-amber-100">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
@@ -70,14 +70,14 @@
     </nav>
 
     <!-- User Profile -->
-    <div class="p-4 border-t border-green-700">
+    <div class="p-4 border-t border-amber-700">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+        <div class="w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center">
           <span class="font-bold">A</span>
         </div>
         <div class="flex-1">
           <p class="text-sm font-medium">Admin User</p>
-          <p class="text-xs text-green-200">Administrator</p>
+          <p class="text-xs text-amber-200">Administrator</p>
         </div>
       </div>
     </div>
@@ -108,7 +108,7 @@
             <!-- Search Bar -->
             <div class="hidden md:block relative">
               <input type="text" placeholder="Search..."
-                class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent w-64" />
+                class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent w-64" />
               <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -163,8 +163,8 @@
                 +{{ ordersLast5Days }} in last 5 days
               </p>
             </div>
-            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
               </svg>
@@ -243,7 +243,7 @@
         <div class="bg-white rounded-xl shadow-sm border p-6">
           <div class="flex items-center justify-between mb-6">
             <h3 class="text-lg font-semibold text-gray-900">Orders (Last 5 Days)</h3>
-            <select class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <select class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-amber-500">
               <option>Last 5 days</option>
               <option>Last week</option>
               <option>Last month</option>
@@ -264,7 +264,7 @@
               <g *ngFor="let item of ordersChart; let i = index">
                 <rect [attr.x]="i * 70 + 40" [attr.y]="160 - (item.value / maxOrders) * 120" width="40"
                   [attr.height]="(item.value / maxOrders) * 120"
-                  class="fill-green-500 opacity-80 hover:opacity-100 cursor-pointer" rx="4">
+                  class="fill-amber-500 opacity-80 hover:opacity-100 cursor-pointer" rx="4">
                 </rect>
 
                 <!-- Value on top of bar -->
@@ -286,7 +286,7 @@
         <div class="bg-white rounded-xl shadow-sm border p-6">
           <div class="flex items-center justify-between mb-6">
             <h3 class="text-lg font-semibold text-gray-900">Revenue Trend</h3>
-            <select class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <select class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-amber-500">
               <option>This week</option>
               <option>Last week</option>
               <option>This month</option>
@@ -304,18 +304,18 @@
               </g>
 
               <!-- Line -->
-              <polyline fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+              <polyline fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
                 [attr.points]="revenuePolylinePoints">
               </polyline>
 
               <!-- Area under line -->
-              <polygon [attr.points]="revenuePolylinePoints + ' 400,200 0,200'" class="fill-green-500 opacity-10">
+              <polygon [attr.points]="revenuePolylinePoints + ' 400,200 0,200'" class="fill-amber-500 opacity-10">
               </polygon>
 
               <!-- Points -->
               <g *ngFor="let point of revenueChart; let i = index">
                 <circle [attr.cx]="i * 80 + 40" [attr.cy]="160 - (point.value / maxRevenue) * 120" r="6"
-                  class="fill-white stroke-green-500 stroke-2 cursor-pointer hover:r-8 transition-all">
+                  class="fill-white stroke-amber-500 stroke-2 cursor-pointer hover:r-8 transition-all">
                 </circle>
 
                 <!-- Value on hover (tooltip) -->
@@ -341,7 +341,7 @@
           <div class="px-6 py-4 border-b">
             <div class="flex items-center justify-between">
               <h3 class="text-lg font-semibold text-gray-900">Recent Orders</h3>
-              <a href="#" class="text-sm text-green-600 hover:text-green-700 font-medium">View all →</a>
+              <a href="#" class="text-sm text-amber-600 hover:text-amber-700 font-medium">View all →</a>
             </div>
           </div>
 
@@ -376,7 +376,7 @@
           <div class="px-6 py-4 border-b">
             <div class="flex items-center justify-between">
               <h3 class="text-lg font-semibold text-gray-900">Best Selling Products</h3>
-              <a href="#" class="text-sm text-green-600 hover:text-green-700 font-medium">View all →</a>
+              <a href="#" class="text-sm text-amber-600 hover:text-amber-700 font-medium">View all →</a>
             </div>
           </div>
 
@@ -385,8 +385,8 @@
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                   <div
-                    class="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center">
-                    <span class="font-bold text-green-700">{{ i + 1 }}</span>
+                    class="w-10 h-10 bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg flex items-center justify-center">
+                    <span class="font-bold text-amber-700">{{ i + 1 }}</span>
                   </div>
                   <div>
                     <p class="font-medium text-gray-900">{{ item.name }}</p>
@@ -395,7 +395,7 @@
                 </div>
                 <div class="text-right">
                   <p class="font-bold text-gray-900">{{ item.sold }} sold</p>
-                  <p class="text-xs text-green-600 mt-1">+12% this week</p>
+                  <p class="text-xs text-amber-600 mt-1">+12% this week</p>
                 </div>
               </div>
             </div>
@@ -409,7 +409,7 @@
           <div class="flex items-center justify-between">
             <h3 class="text-lg font-semibold text-gray-900">Menu Management</h3>
             <button (click)="showMenuForm = !showMenuForm"
-              class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center space-x-2">
+              class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition flex items-center space-x-2">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
               </svg>
@@ -425,21 +425,21 @@
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Item Name</label>
                 <input type="text" [(ngModel)]="newItem.name" name="name" placeholder="Enter item name"
-                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   required />
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Base Price (₹)</label>
                 <input type="number" [(ngModel)]="newItem.basePrice" name="basePrice" placeholder="0"
-                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   required min="0" />
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Type</label>
                 <select [(ngModel)]="newItem.type" name="type"
-                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
                   <option value="veg">Vegetarian</option>
                   <option value="egg">Egg</option>
                   <option value="nonveg">Non-Vegetarian</option>
@@ -447,16 +447,37 @@
               </div>
 
               <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                <select [(ngModel)]="newItem.category" name="category"
+                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                  <option value="snacks">Snacks</option>
+                  <option value="starters">Starters</option>
+                  <option value="sandwiches">Sandwiches</option>
+                  <option value="noodles">Noodles & Maggi</option>
+                  <option value="pizzas">Pizzas</option>
+                  <option value="pasta">Pasta</option>
+                  <option value="burgers">Burgers</option>
+                  <option value="gravy">Gravy Items</option>
+                  <option value="roti">Roti & Rice</option>
+                  <option value="thali">Thali</option>
+                  <option value="beverages">Beverages</option>
+                  <option value="sweets">Sweets & Bakery</option>
+                  <option value="healthy">Healthy Food</option>
+                  <option value="bakery">Bakery</option>
+                </select>
+              </div>
+
+              <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
                 <input type="text" [(ngModel)]="newItem.image" name="image" placeholder="https://example.com/image.jpg"
-                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
               </div>
-            </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-              <input type="text" [(ngModel)]="newItem.subtitle" name="subtitle" placeholder="Short description"
-                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                <input type="text" [(ngModel)]="newItem.subtitle" name="subtitle" placeholder="Short description"
+                  class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
+              </div>
             </div>
 
             <div class="flex justify-end space-x-3">
@@ -465,7 +486,7 @@
                 Cancel
               </button>
               <button type="submit" [disabled]="!newItem.name || newItem.basePrice <= 0"
-                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
                 Add Item
               </button>
             </div>
@@ -478,6 +499,7 @@
             <thead class="bg-gray-50">
               <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Addons</th>
@@ -496,12 +518,17 @@
                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                       </div>
-                    </div>
+                    </div>2
                     <div>
                       <p class="font-medium text-gray-900">{{ item.name }}</p>
                       <p class="text-sm text-gray-500">{{ item.subtitle }}</p>
                     </div>
                   </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-800">
+                    {{ getCategoryDisplayName(item.category) }}
+                  </span>
                 </td>
                 <td class="px-6 py-4">
                   <span class="px-2 py-1 text-xs rounded-full" [class.bg-green-100]="item.type === 'veg'"

@@ -16,6 +16,11 @@ interface MenuFood extends Food {
   addons: Addon[];
 }
 
+interface Category {
+  id: string;
+  name: string;
+}
+
 @Component({
   standalone: true,
   selector: 'app-menu',
@@ -27,6 +32,24 @@ export class Menu {
   faCartPlus = faCartPlus;
 
   selectedType: 'all' | FoodType = 'all';
+  selectedCategory: string = 'all';
+
+  categories: Category[] = [
+    { id: 'all', name: 'All Items' },
+    { id: 'snacks', name: 'Snacks' },
+    { id: 'starters', name: 'Starters' },
+    { id: 'sandwiches', name: 'Sandwiches' },
+    { id: 'noodles', name: 'Noodles & Maggi' },
+    { id: 'pizzas', name: 'Pizzas' },
+    { id: 'pasta', name: 'Pasta' },
+    { id: 'burgers', name: 'Burgers' },
+    { id: 'gravy', name: 'Gravy Items' },
+    { id: 'roti', name: 'Roti & Rice' },
+    { id: 'thali', name: 'Thali' },
+    { id: 'beverages', name: 'Beverages' },
+    { id: 'sweets', name: 'Sweets & Bakery' },
+    { id: 'healthy', name: 'Healthy Food' }
+  ];
 
   foods: MenuFood[] = [];
 
@@ -35,8 +58,8 @@ export class Menu {
   ========================== */
   showAddonModal = false;
   selectedFood!: MenuFood;
-  modalSelectedFreeAddons: Addon[] = []; // For free addons (onion, tomato, cucumber, lemon, coriander)
-  modalSelectedPremiumAddons: Addon[] = []; // For premium addons (paid)
+  modalSelectedFreeAddons: Addon[] = [];
+  modalSelectedPremiumAddons: Addon[] = [];
   modalTotal = 0;
 
   /* =========================
@@ -61,7 +84,10 @@ export class Menu {
     'Capsicum': 'https://images.unsplash.com/photo-1596284244832-2de51e60d1c2?w=200&h=200&fit=crop&crop=center',
     'Cheese': 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop&crop=center',
     'Mushroom': 'https://images.unsplash.com/photo-1485579148751-308a1fe6b0b5?w=200&h=200&fit=crop&crop=center',
-    'Bell Pepper': 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=200&h=200&fit=crop&crop=center'
+    'Bell Pepper': 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=200&h=200&fit=crop&crop=center',
+    'Extra Chicken': 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=200&h=200&fit=crop&crop=center',
+    'Extra Paneer': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&h=200&fit=crop&crop=center',
+    'Extra Sauce': 'https://images.unsplash.com/photo-1576797690066-3b4c7f59a4a2?w=200&h=200&fit=crop&crop=center'
   };
 
   constructor(
@@ -116,6 +142,8 @@ export class Menu {
         { id: 9, name: 'Peas', price: 15 },
         { id: 10, name: 'Spinach', price: 20 },
         { id: 15, name: 'Bell Pepper', price: 15 },
+        { id: 16, name: 'Extra Cheese', price: 30 },
+        { id: 17, name: 'Extra Sauce', price: 20 },
       ];
     } else if (item.type === 'nonveg') {
       premiumAddons = [
@@ -124,6 +152,8 @@ export class Menu {
         { id: 13, name: 'Cheese', price: 30 },
         { id: 14, name: 'Mushroom', price: 25 },
         { id: 16, name: 'Bell Pepper', price: 15 },
+        { id: 18, name: 'Extra Chicken', price: 50 },
+        { id: 19, name: 'Extra Sauce', price: 20 },
       ];
     }
 
@@ -132,18 +162,18 @@ export class Menu {
     return {
       id: item.id,
       name: item.name,
-      subtitle: item.subtitle || 'Healthy • Fresh • Protein-rich',
+      subtitle: item.subtitle || 'Delicious • Fresh • Flavorful',
       basePrice: item.basePrice,
-      category: 'sprouts',
+      category: 'snacks',
       type: item.type,
       image: item.image,
       addons: allAddons,
-      freeAddonIds: freeAddons.map(a => a.id), // All free addons (checked by default)
+      freeAddonIds: freeAddons.map(a => a.id),
     };
   }
 
   /* =========================
-     FALLBACK MENU
+     FALLBACK MENU - Based on PDF
   ========================== */
   getFallbackMenu(): MenuFood[] {
     // Free addons
@@ -163,6 +193,8 @@ export class Menu {
       { id: 9, name: 'Peas', price: 15 },
       { id: 10, name: 'Spinach', price: 20 },
       { id: 15, name: 'Bell Pepper', price: 15 },
+      { id: 16, name: 'Extra Cheese', price: 30 },
+      { id: 17, name: 'Extra Sauce', price: 20 },
     ];
 
     // Non-Veg premium addons
@@ -172,51 +204,349 @@ export class Menu {
       { id: 13, name: 'Cheese', price: 30 },
       { id: 14, name: 'Mushroom', price: 25 },
       { id: 16, name: 'Bell Pepper', price: 15 },
+      { id: 18, name: 'Extra Chicken', price: 50 },
+      { id: 19, name: 'Extra Sauce', price: 20 },
     ];
 
     return [
+      // SNACKS
       {
         id: 1,
-        name: 'Moong Sprouts Bowl',
-        subtitle: 'Healthy • Fresh • Protein-rich',
-        basePrice: 80,
-        category: 'sprouts',
+        name: 'Veg Pakoda',
+        subtitle: 'Crispy fried vegetable fritters',
+        basePrice: 50,
+        category: 'snacks',
         type: 'veg',
-        image: 'https://images.unsplash.com/photo-1540420828642-fca2c5c18abe?w=600&h=400&fit=crop&crop=center',
+        image: 'https://images.unsplash.com/photo-1563379091339-03246963d9d6?w=600&h=400&fit=crop&crop=center',
         freeAddonIds: [1, 2, 3, 4, 5],
         addons: [...freeAddons, ...vegEggPremiumAddons],
       },
       {
         id: 2,
-        name: 'Egg Sprouts Bowl',
-        subtitle: 'High Protein • Energizing',
-        basePrice: 100,
-        category: 'sprouts',
-        type: 'egg',
-        image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop&crop=center',
+        name: 'Potato Cheese Balls',
+        subtitle: 'Crispy potato balls stuffed with cheese',
+        basePrice: 99,
+        category: 'snacks',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&h=400&fit=crop&crop=center',
         freeAddonIds: [1, 2, 3, 4, 5],
         addons: [...freeAddons, ...vegEggPremiumAddons],
       },
       {
         id: 3,
-        name: 'Chicken Sprouts Bowl',
-        subtitle: 'High Protein • Muscle Building',
-        basePrice: 120,
-        category: 'sprouts',
+        name: 'Nachos with Cheese',
+        subtitle: 'Crispy nachos topped with melted cheese',
+        basePrice: 250,
+        category: 'snacks',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+
+      // STARTERS
+      {
+        id: 4,
+        name: 'Paneer Tikka',
+        subtitle: 'Grilled cottage cheese cubes with spices',
+        basePrice: 180,
+        category: 'starters',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+      {
+        id: 5,
+        name: 'Chicken 65',
+        subtitle: 'Spicy deep-fried chicken bites',
+        basePrice: 175,
+        category: 'starters',
         type: 'nonveg',
         image: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=600&h=400&fit=crop&crop=center',
         freeAddonIds: [1, 2, 3, 4, 5],
         addons: [...freeAddons, ...nonvegPremiumAddons],
       },
+      {
+        id: 6,
+        name: 'Egg Bhurji',
+        subtitle: 'Spicy scrambled eggs with onions',
+        basePrice: 80,
+        category: 'starters',
+        type: 'egg',
+        image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+
+      // SANDWICHES
+      {
+        id: 7,
+        name: 'Grilled Paneer Cheese',
+        subtitle: 'Sourdough bread with paneer and cheese',
+        basePrice: 150,
+        category: 'sandwiches',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+      {
+        id: 8,
+        name: 'Grilled Chicken Cheese',
+        subtitle: 'Sourdough bread with chicken and cheese',
+        basePrice: 160,
+        category: 'sandwiches',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+
+      // NOODLES
+      {
+        id: 9,
+        name: 'Chicken Noodles',
+        subtitle: 'Stir-fried noodles with chicken and vegetables',
+        basePrice: 160,
+        category: 'noodles',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+      {
+        id: 10,
+        name: 'Piquant Special Maggi',
+        subtitle: 'Veggies, Paneer, Mushroom, Corn, Cheese Maggi',
+        basePrice: 120,
+        category: 'noodles',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+
+      // PIZZAS
+      {
+        id: 11,
+        name: 'Cheese Pizza (7")',
+        subtitle: 'Classic cheese pizza',
+        basePrice: 150,
+        category: 'pizzas',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+      {
+        id: 12,
+        name: 'Chicken Cheese Pizza (7")',
+        subtitle: 'Pizza topped with chicken and cheese',
+        basePrice: 180,
+        category: 'pizzas',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+
+      // PASTA
+      {
+        id: 13,
+        name: 'Cheese Pasta (White Sauce)',
+        subtitle: 'Creamy white sauce pasta with cheese',
+        basePrice: 160,
+        category: 'pasta',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+      {
+        id: 14,
+        name: 'Chicken Cheese Pasta (Pink Sauce)',
+        subtitle: 'Pink sauce pasta with chicken and cheese',
+        basePrice: 210,
+        category: 'pasta',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+
+      // BURGERS
+      {
+        id: 15,
+        name: 'Chicken Burger',
+        subtitle: 'Juicy chicken patty with veggies',
+        basePrice: 145,
+        category: 'burgers',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+
+      // GRAVY ITEMS
+      {
+        id: 16,
+        name: 'Paneer Butter Masala',
+        subtitle: 'Cottage cheese in rich buttery gravy',
+        basePrice: 170,
+        category: 'gravy',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+      {
+        id: 17,
+        name: 'Chicken Butter Masala',
+        subtitle: 'Chicken in rich buttery gravy',
+        basePrice: 180,
+        category: 'gravy',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+
+      // RICE ITEMS
+      {
+        id: 18,
+        name: 'Chicken Biryani + Raita',
+        subtitle: 'Fragrant rice with chicken and spices',
+        basePrice: 199,
+        category: 'roti',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1563379091339-03246963d9d6?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+      {
+        id: 19,
+        name: 'Veg Fried Rice',
+        subtitle: 'Fried rice with mixed vegetables',
+        basePrice: 150,
+        category: 'roti',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+
+      // THALI
+      {
+        id: 20,
+        name: 'Veg Deluxe Thali',
+        subtitle: 'Rice + Roti (2) + Dal + Curry + Fry + Salad + Sweet',
+        basePrice: 160,
+        category: 'thali',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+      {
+        id: 21,
+        name: 'Chicken Deluxe Thali',
+        subtitle: 'Rice + Roti (2) + Dal + Chicken (2) + Salad + Sweet',
+        basePrice: 220,
+        category: 'thali',
+        type: 'nonveg',
+        image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...nonvegPremiumAddons],
+      },
+
+      // BEVERAGES
+      {
+        id: 22,
+        name: 'Cold Coffee with Boba',
+        subtitle: 'Iced coffee with tapioca pearls',
+        basePrice: 120,
+        category: 'beverages',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1510707577719-ae7c9b788690?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+      {
+        id: 23,
+        name: 'Sweet Lassi',
+        subtitle: 'Refreshing sweet yogurt drink',
+        basePrice: 70,
+        category: 'beverages',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+
+      // SWEETS
+      {
+        id: 24,
+        name: 'Gajar Halwa',
+        subtitle: 'Traditional carrot pudding',
+        basePrice: 120,
+        category: 'sweets',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      },
+
+      // HEALTHY FOOD
+      {
+        id: 25,
+        name: 'Piquants Salad',
+        subtitle: 'Fresh garden salad with special dressing',
+        basePrice: 60,
+        category: 'healthy',
+        type: 'veg',
+        image: 'https://images.unsplash.com/photo-1540420828642-fca2c5c18abe?w=600&h=400&fit=crop&crop=center',
+        freeAddonIds: [1, 2, 3, 4, 5],
+        addons: [...freeAddons, ...vegEggPremiumAddons],
+      }
     ];
   }
 
   /* =========================
-     FILTER
+     FILTER METHODS
   ========================== */
   get filteredFoods() {
-    if (this.selectedType === 'all') return this.foods;
-    return this.foods.filter(f => f.type === this.selectedType);
+    let filtered = this.foods;
+    
+    // Filter by type
+    if (this.selectedType !== 'all') {
+      filtered = filtered.filter(f => f.type === this.selectedType);
+    }
+    
+    // Filter by category
+    if (this.selectedCategory !== 'all') {
+      filtered = filtered.filter(f => f.category === this.selectedCategory);
+    }
+    
+    return filtered;
+  }
+
+  selectCategory(categoryId: string) {
+    this.selectedCategory = categoryId;
+  }
+
+  getCategoryName(categoryId: string): string {
+    const category = this.categories.find(c => c.id === categoryId);
+    return category ? category.name : 'All Items';
+  }
+
+  getTypeIcon(type: FoodType): string {
+    switch(type) {
+      case 'veg': return '🥬';
+      case 'egg': return '🥚';
+      case 'nonveg': return '🍗';
+      default: return '🍽️';
+    }
   }
 
   /* =========================
